@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1 (Python 3.11.4 on win32)" generated="20230731 16:17:09.908" rpa="false" schemaversion="4">
+<suite id="s1" name="Amazon Testes" source="c:\CursoUdemy\RobotFramework\WebTesting\amazon_testes.robot">
+<test id="s1-t1" name="Caso Test 01 - Acesso ao menu &quot;Eletrônicos&quot;" line="2">
+<status status="FAIL" starttime="20230731 16:17:10.019" endtime="20230731 16:17:10.021">Test cannot be empty.</status>
+</test>
+<status status="FAIL" starttime="20230731 16:17:09.950" endtime="20230731 16:17:10.026"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Amazon Testes">Amazon Testes</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
