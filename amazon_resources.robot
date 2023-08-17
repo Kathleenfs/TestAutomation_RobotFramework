@@ -1,5 +1,6 @@
 *** Settings ***
 Library      SeleniumLibrary
+Library    XML
 
 
 *** Variables ***
@@ -30,3 +31,7 @@ Verificar se aparece a frase "Eletrônicos e Tecnologia"
 
 Verificar se o título da página fica "${TITULO}"
     Title Should Be    title=${TITULO}
+
+Verificar se aparece a categoria "${NOME_CATEGORIA}"
+    Element Should Be Visible    locator=//img[contains(@alt,'${NOME_CATEGORIA}')]
+    
