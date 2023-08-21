@@ -8,6 +8,7 @@ ${URL}    https://www.amazon.com.br/
 ${MENU_ELETRONICOS}    //a[@href='/Eletronicos-e-Tecnologia/b/?ie=UTF8&node=16209062011&ref_=nav_cs_electronics'][contains(.,'Eletrônicos')]
 ${HEADER_ELETRONICOS}    //h1[contains(.,'Eletrônicos e Tecnologia')]
 ${TEXTO_HEADER_ELETRONICOS}    Eletrônicos e Tecnologia 
+${excluir}       //input[contains(@name,'submit.delete.C7c7abeac-7d03-4da8-81e8-93a650401c67')]
 
 *** Keywords ***
 
@@ -48,7 +49,20 @@ Verificar o resultado da pesquisa, listando o produto "${PRODUTO}".
     Wait Until Element Is Visible    locator=//span[@class='a-size-base-plus a-color-base a-text-normal'][contains(.,'${PRODUTO}')]
 
 
-# GHERKIN STEPS
+
+# # GHERKIN STEPS
+# Given (pt: Dado): Utilizado para especificar uma pré condição, dentro desse step é feita a validação de uma condição antes de se prosseguir para os próximos passos. Por se tratar de uma pré condição, normalmente vem escrito no passado;
+# When (pt: Quando): Utilizado quando será executada uma ação de que se espera uma reação vinda do sistema, que será validada no step “Then”. Este passo vem escrito no presente;
+# Then (pt: Então): Valida se o esperado aconteceu. Segue sempre um passo do tipo “Quando”, pois aqui é validada a reação da ação recebida. Por se tratar do resultado esperado, normalmente vem escrito na forma de futuro próximo;
+# And (pt: E): Caso seja necessário mais uma interação com o sistema para complementar um fluxo, mas que não necessariamente se trata de uma ação ou reação, se utiliza “And”;
+# But (pt: Mas): No geral serve a mesma funcionalidade do “And”, porém é normalmente utilizado após uma validação negativa depois do “Then”;
+# Sabendo disso, podemos traduzir a nossa etapa de login no sistema XPTO para:
+
+# Dado que “Fulano” possui uma conta no sistema
+# E ele acessa a página de login
+# E ele preenche suas credenciais válidas
+# Quando ele aciona a opção de realizar login
+# Então ele deve ser redirecionado para a página inicial logado
 
 Dado que estou na home page da Amazon.com.br
     Acessar a home page do site Amazon.com.br
@@ -72,3 +86,24 @@ Então o título da página deve ficar "Amazon.com.br : Xbox Series S"
     Verificar se o título da página fica "Amazon.com.br : Xbox Series S"
 E um produto da linha "Xbox Series S" deve ser mostrado na página
     Verificar o resultado da pesquisa, listando o produto "Console Xbox Series S".
+
+#case 4
+Verificar o resultado da pesquisa se está listando o produto "Console Xbox Series S"
+    Verificar o resultado da pesquisa, listando o produto "Console Xbox Series S".
+
+Adicionar o produto "Console Xbox Series S" no carrinho
+    Click Element    locator=//span[@class='a-size-base-plus a-color-base a-text-normal'][contains(.,'Console Xbox Series S')]
+    Wait Until Element Is Visible     locator=//input[contains(@name,'submit.add-to-cart')]
+    Click Element    locator=add-to-cart-button
+
+Verificar se o produto "Console Xbox Series S" foi adicionado com sucesso
+  Click Element    locator=//a[contains(@data-csa-c-type,'button')]
+  Wait Until Element Is Visible     locator=//span[@class='a-truncate-cut'][contains(.,'Console Xbox Series S')]
+
+
+ Remover o produto "Console Xbox Series S" do carrinho
+  
+     Click Element    locator=${excluir}
+
+Verificar se o carrinho fica vazio
+    Wait Until Element Is Visible    locator= //h1[@class='a-spacing-mini a-spacing-top-base'][contains(.,'Seu carrinho de compras da Amazon está vazio.')]
